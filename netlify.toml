@@ -1,0 +1,89 @@
+[build]
+  publish = "public"
+
+# Clean URLs for static pages
+[[redirects]]
+  from = "/privacy"
+  to = "/privacy.html"
+  status = 200
+
+[[redirects]]
+  from = "/terms"
+  to = "/terms.html"
+  status = 200
+
+[[redirects]]
+  from = "/about"
+  to = "/about.html"
+  status = 200
+
+# Category pages serve index (JS handles filtering)
+[[redirects]]
+  from = "/innovation"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/science"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/space"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/health"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/community"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/environment"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/weird"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/plus"
+  to = "/index.html"
+  status = 200
+
+# Catch-all
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Security and performance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

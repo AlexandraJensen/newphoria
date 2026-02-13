@@ -1,0 +1,21 @@
+{
+  "name": "newphoria-pipeline",
+  "version": "1.0.0",
+  "description": "Newphoria News — AI classification pipeline powered by Coaptō engine pattern",
+  "type": "module",
+  "scripts": {
+    "classify": "node scripts/classify.mjs",
+    "test": "node scripts/classify.mjs"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "@supabase/supabase-js": "^2.49.0",
+    "rss-parser": "^3.13.0"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "author": "Agapē LAC Inc.",
+  "license": "UNLICENSED",
+  "private": true
+}
