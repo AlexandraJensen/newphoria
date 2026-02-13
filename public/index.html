@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Newphoria News — Constructive Journalism, Curated by AI</title>
+<meta name="description" content="AI-curated constructive journalism. The stories that move the world forward — innovation, progress, discovery, and the wonderfully weird.">
+<meta property="og:title" content="Newphoria News">
+<meta property="og:description" content="AI-curated constructive journalism. The stories that move the world forward.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://newphoria.news">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://newphoria.news">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%234ECDC4'/><text x='50' y='72' text-anchor='middle' font-family='Georgia' font-weight='700' font-size='62' fill='%23020408'>N</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#020408;--deep:#070D18;--cosmos:#0C1525;--nebula:#111C32;--twilight:#1A2B4A;
+  --text:#F0F2F5;--text-2:#B8C4D6;--text-3:#6B7B94;--text-4:#3E4F68;
+  --cyan:#4ECDC4;--mint:#3DD9A0;--violet:#7B68EE;--rose:#E8557A;--gold:#E8B84B;--orange:#E08A45;
+  --glass:rgba(255,255,255,0.03);--glass-md:rgba(255,255,255,0.055);--glass-lg:rgba(255,255,255,0.08);
+  --bdr:rgba(255,255,255,0.06);--bdr-md:rgba(255,255,255,0.10);--bdr-lg:rgba(255,255,255,0.15);
+  --r:12px;--r-lg:18px;--r-xl:24px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Outfit',sans-serif;background:var(--void);color:var(--text-2);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+img{display:block;max-width:100%;}
+a{transition:all 0.2s;}
+
+.space{position:fixed;inset:0;z-index:0;}
+.space-photo{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1920&q=80') center/cover no-repeat;opacity:0.15;}
+.space-grade{position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 30% 20%,rgba(123,104,238,0.06),transparent),radial-gradient(ellipse 60% 40% at 70% 70%,rgba(78,205,196,0.04),transparent),linear-gradient(180deg,rgba(2,4,8,0.3) 0%,rgba(7,13,24,0.8) 40%,rgba(7,13,24,0.95) 100%);}
+.wrap{position:relative;z-index:1;}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(7,13,24,0.7);backdrop-filter:blur(40px) saturate(1.6);-webkit-backdrop-filter:blur(40px) saturate(1.6);border-bottom:1px solid var(--bdr);padding:0 28px;}
+.nav-in{max-width:1300px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px;}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none;}
+.logo{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--cyan),var(--mint));display:flex;align-items:center;justify-content:center;font:700 18px/1 'Playfair Display',serif;color:var(--void);box-shadow:0 3px 16px rgba(78,205,196,0.3);}
+.wordmark{font:600 22px/1 'Playfair Display',serif;color:var(--text);letter-spacing:-0.5px;}
+.wordmark span{color:var(--cyan);}
+.nav-r{display:flex;align-items:center;gap:4px;list-style:none;}
+.nav-r a{text-decoration:none;color:var(--text-3);font-size:13px;font-weight:500;padding:7px 13px;border-radius:8px;transition:all 0.2s;}
+.nav-r a:hover{color:var(--text);background:var(--glass-md);}
+.nav-r a.on{color:var(--cyan);background:rgba(78,205,196,0.1);}
+.nav-sub{background:linear-gradient(135deg,var(--cyan),var(--mint))!important;color:var(--void)!important;font-weight:600!important;box-shadow:0 3px 14px rgba(78,205,196,0.25);}
+.nav-sub:hover{transform:translateY(-1px);box-shadow:0 5px 20px rgba(78,205,196,0.35)!important;}
+.nav-plus{background:linear-gradient(135deg,var(--violet),var(--rose))!important;color:#fff!important;font-weight:600!important;margin-left:2px;box-shadow:0 3px 14px rgba(123,104,238,0.25);}
+.nav-mob{display:none;background:none;border:none;cursor:pointer;width:28px;height:20px;flex-direction:column;justify-content:space-between;}
+.nav-mob span{display:block;width:100%;height:2px;background:var(--text-2);border-radius:2px;transition:all 0.3s;}
+
+/* HERO */
+.hero{position:relative;overflow:hidden;margin-bottom:48px;}
+.hero-img{width:100%;height:520px;position:relative;background:url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=80') center 30%/cover no-repeat;}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,var(--deep) 0%,rgba(7,13,24,0.6) 40%,rgba(7,13,24,0.3) 100%);}
+.hero-content{position:absolute;bottom:0;left:0;right:0;padding:0 28px 48px;max-width:1300px;margin:0 auto;}
+.hero-inner{max-width:720px;animation:fadeIn 1s ease-out;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+.hero-tag{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:2px;color:var(--cyan);margin-bottom:18px;}
+.dot{width:6px;height:6px;background:var(--mint);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+.hero h1{font:500 clamp(32px,5vw,52px)/1.1 'Playfair Display',serif;color:var(--text);letter-spacing:-1.5px;margin-bottom:14px;}
+.hero-src{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--text-3);}
+.hero-src strong{color:var(--text-2);font-weight:600;}
+.hero-excerpt{font-size:16px;color:var(--text-2);line-height:1.7;margin:14px 0 22px;max-width:600px;}
+.hero-link{display:inline-flex;align-items:center;gap:6px;color:var(--cyan);font-size:14px;font-weight:600;text-decoration:none;transition:gap 0.2s;}
+.hero-link:hover{gap:10px;}
+
+/* SECTIONS */
+.sec{max-width:1300px;margin:0 auto;padding:0 28px;}
+.sec-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;}
+.sec-t{font:500 22px/1 'Playfair Display',serif;color:var(--text);display:flex;align-items:center;gap:9px;}
+.filters{display:flex;gap:5px;flex-wrap:wrap;}
+.fil{background:var(--glass);border:1px solid var(--bdr);color:var(--text-3);padding:5px 13px;border-radius:18px;font-size:12px;font-weight:500;cursor:pointer;transition:all 0.2s;font-family:inherit;}
+.fil:hover,.fil.on{background:rgba(78,205,196,0.08);border-color:rgba(78,205,196,0.2);color:var(--cyan);}
+
+/* FEATURED */
+.feat-row{max-width:1300px;margin:0 auto 48px;padding:0 28px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;}
+.feat{background:var(--glass);border:1px solid var(--bdr);border-radius:var(--r-lg);overflow:hidden;transition:all 0.3s;cursor:pointer;text-decoration:none;color:inherit;display:block;}
+.feat:hover{transform:translateY(-5px);border-color:var(--bdr-md);box-shadow:0 20px 60px rgba(0,0,0,0.35);}
+.feat-img{width:100%;height:200px;overflow:hidden;position:relative;}
+.feat-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s;}
+.feat:hover .feat-img img{transform:scale(1.05);}
+.feat-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(7,13,24,0.7) 0%,transparent 60%);}
+.feat-src{position:absolute;bottom:10px;left:10px;display:flex;align-items:center;gap:6px;background:rgba(7,13,24,0.7);backdrop-filter:blur(8px);padding:4px 10px;border-radius:6px;font-size:10px;font-weight:600;color:var(--text-2);}
+.feat-bloom{position:absolute;top:10px;right:10px;background:rgba(78,205,196,0.15);border:1px solid rgba(78,205,196,0.25);color:var(--cyan);font-size:10px;font-weight:700;padding:3px 10px;border-radius:14px;backdrop-filter:blur(8px);}
+.feat-body{padding:20px 22px 22px;}
+.feat-cat{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.4px;margin-bottom:7px;}
+.feat-t{font:500 18px/1.3 'Playfair Display',serif;color:var(--text);margin-bottom:8px;letter-spacing:-0.2px;}
+.feat-ex{font-size:13px;color:var(--text-3);line-height:1.55;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.feat-m{font-size:11px;color:var(--text-4);margin-top:10px;}
+
+/* MAIN GRID */
+.main{max-width:1300px;margin:0 auto;padding:0 28px 60px;display:grid;grid-template-columns:1fr 360px;gap:40px;}
+
+/* ARTICLE CARDS */
+.feed{display:grid;gap:16px;}
+.ac{background:var(--glass);border:1px solid var(--bdr);border-radius:var(--r-lg);display:grid;grid-template-columns:240px 1fr;overflow:hidden;transition:all 0.3s;text-decoration:none;color:inherit;}
+.ac:hover{transform:translateY(-3px);border-color:var(--bdr-md);box-shadow:0 14px 44px rgba(0,0,0,0.3);}
+.ac-img{position:relative;overflow:hidden;}
+.ac-img img{width:100%;height:100%;object-fit:cover;min-height:170px;transition:transform 0.4s;}
+.ac:hover .ac-img img{transform:scale(1.05);}
+.ac-ov{position:absolute;inset:0;background:linear-gradient(135deg,rgba(7,13,24,0.2),rgba(7,13,24,0.05));}
+.ac-bloom{position:absolute;top:9px;left:9px;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;border:2px solid var(--void);box-shadow:0 2px 10px rgba(0,0,0,0.4);}
+.b5{background:var(--mint);color:var(--void);}.b4{background:var(--cyan);color:var(--void);}.b3{background:var(--gold);color:var(--void);}
+.ac-src{position:absolute;bottom:9px;left:9px;display:flex;align-items:center;gap:5px;background:rgba(7,13,24,0.7);backdrop-filter:blur(6px);padding:3px 8px;border-radius:5px;font-size:10px;font-weight:600;color:var(--text-2);}
+.ac-body{padding:20px 24px;display:flex;flex-direction:column;justify-content:center;}
+.ac-cat{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.4px;margin-bottom:5px;}
+.ac-t{font:500 17px/1.35 'Playfair Display',serif;color:var(--text);margin-bottom:7px;}
+.ac-ex{font-size:13px;color:var(--text-3);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:10px;}
+.ac-m{font-size:11px;color:var(--text-4);}
+.c-cyan{color:var(--cyan);}.c-mint{color:var(--mint);}.c-violet{color:var(--violet);}.c-rose{color:var(--rose);}.c-gold{color:var(--gold);}.c-orange{color:var(--orange);}
+
+/* IN-FEED AD */
+.ifad{background:var(--glass-md);border:1px solid var(--bdr);border-radius:var(--r-lg);padding:24px 28px;display:flex;gap:20px;align-items:center;position:relative;}
+.ifad-lab{position:absolute;top:10px;right:14px;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--text-4);}
+.ifad-img{width:72px;height:72px;border-radius:16px;overflow:hidden;flex-shrink:0;}
+.ifad-img img{width:100%;height:100%;object-fit:cover;}
+.ifad h4{font:500 17px/1.3 'Playfair Display',serif;color:var(--text);margin-bottom:5px;}
+.ifad p{font-size:13px;color:var(--text-3);line-height:1.5;margin-bottom:8px;}
+.ifad a{color:var(--cyan);font-size:13px;font-weight:600;text-decoration:none;}
+.adsense{background:var(--glass);border:1px dashed var(--bdr-md);border-radius:var(--r);min-height:90px;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--text-4);}
+
+/* WONDERFULLY WEIRD */
+.weird{margin-top:48px;padding-top:48px;border-top:1px solid var(--bdr);}
+.weird-head{margin-bottom:6px;}
+.weird-t{font:500 22px/1 'Playfair Display',serif;color:var(--text);}
+.weird-sub{font-size:13px;color:var(--text-3);margin-bottom:22px;font-style:italic;}
+.weird-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.wc{background:var(--glass);border:1px solid var(--bdr);border-radius:var(--r);overflow:hidden;transition:all 0.3s;text-decoration:none;color:inherit;display:block;}
+.wc:hover{transform:translateY(-3px);border-color:rgba(224,138,69,0.2);box-shadow:0 10px 30px rgba(0,0,0,0.25);}
+.wc-img{width:100%;height:130px;overflow:hidden;position:relative;}
+.wc-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s;}
+.wc:hover .wc-img img{transform:scale(1.06);}
+.wc-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(7,13,24,0.65),transparent 60%);}
+.wc-body{padding:14px 16px 16px;}
+.wc-t{font:500 14px/1.35 'Playfair Display',serif;color:var(--text);margin-bottom:5px;}
+.wc-d{font-size:12px;color:var(--text-3);line-height:1.45;}
+.wc-tag{margin-top:8px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--orange);}
+
+/* SIDEBAR */
+.side{display:flex;flex-direction:column;gap:22px;}
+.sad{background:var(--glass);border:1px solid var(--bdr);border-radius:var(--r-lg);overflow:hidden;}
+.sad-lab{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--text-4);padding:10px 18px 0;}
+.sad-in{padding:14px 18px 18px;}
+.sad-img{width:100%;height:160px;border-radius:var(--r);overflow:hidden;margin-bottom:12px;}
+.sad-img img{width:100%;height:100%;object-fit:cover;}
+.sad-t{font:500 18px/1.3 'Playfair Display',serif;color:var(--text);margin-bottom:5px;}
+.sad-d{font-size:13px;color:var(--text-3);line-height:1.5;margin-bottom:8px;}
+.sad-cta{color:var(--cyan);font-size:13px;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:5px;transition:gap 0.2s;}
+.sad-cta:hover{gap:9px;}
+
+.prem{background:linear-gradient(135deg,rgba(123,104,238,0.07),rgba(232,85,122,0.04));border:1px solid rgba(123,104,238,0.15);border-radius:var(--r-lg);padding:26px;position:relative;overflow:hidden;}
+.prem::before{content:'';position:absolute;top:-50px;right:-50px;width:180px;height:180px;background:radial-gradient(circle,rgba(123,104,238,0.08),transparent 70%);pointer-events:none;}
+.prem-badge{display:inline-block;background:linear-gradient(135deg,var(--violet),var(--rose));color:#fff;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;padding:3px 10px;border-radius:5px;margin-bottom:12px;}
+.prem h4{font:500 19px/1.3 'Playfair Display',serif;color:var(--text);margin-bottom:6px;}
+.prem>p{font-size:13px;color:var(--text-3);line-height:1.55;margin-bottom:14px;}
+.prem-list{list-style:none;margin-bottom:18px;}
+.prem-list li{font-size:13px;color:var(--text-2);padding:3px 0;padding-left:18px;position:relative;}
+.prem-list li::before{content:'';position:absolute;left:0;top:10px;width:6px;height:6px;border-radius:50%;background:var(--violet);}
+.prem-btn{display:block;width:100%;padding:13px;border:none;border-radius:10px;background:linear-gradient(135deg,var(--violet),var(--rose));color:#fff;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:all 0.25s;text-align:center;text-decoration:none;box-shadow:0 5px 20px rgba(123,104,238,0.25);}
+.prem-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(123,104,238,0.4);}
+.prem-price{font-size:12px;color:var(--text-4);text-align:center;margin-top:8px;}
+
+.nl{background:var(--nebula);border:1px solid var(--bdr-md);border-radius:var(--r-lg);padding:28px 22px;position:relative;overflow:hidden;}
+.nl::before{content:'';position:absolute;top:-50px;right:-50px;width:180px;height:180px;background:radial-gradient(circle,rgba(78,205,196,0.06),transparent 70%);pointer-events:none;}
+.nl h3{font:500 20px/1.3 'Playfair Display',serif;color:var(--text);margin-bottom:6px;}
+.nl>p{font-size:13px;color:var(--text-3);line-height:1.55;margin-bottom:16px;}
+.nl-f{display:flex;flex-direction:column;gap:8px;}
+.nl-i{width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--bdr-md);background:var(--glass-md);color:var(--text);font-size:14px;font-family:inherit;outline:none;transition:all 0.2s;}
+.nl-i::placeholder{color:var(--text-4);}
+.nl-i:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(78,205,196,0.12);}
+.nl-b{width:100%;padding:12px;border-radius:10px;border:none;background:linear-gradient(135deg,var(--cyan),var(--mint));color:var(--void);font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:all 0.2s;box-shadow:0 3px 14px rgba(78,205,196,0.2);}
+.nl-b:hover{transform:translateY(-1px);box-shadow:0 6px 22px rgba(78,205,196,0.35);}
+
+.trend{background:var(--glass);border:1px solid var(--bdr);border-radius:var(--r-lg);padding:22px;}
+.trend h3{font:500 18px/1 'Playfair Display',serif;color:var(--text);margin-bottom:16px;}
+.ti{display:flex;align-items:flex-start;gap:12px;padding:10px 6px;border-radius:8px;cursor:pointer;transition:background 0.2s;}
+.ti:hover{background:var(--glass-md);}
+.ti-n{font:300 26px/1 'Playfair Display',serif;min-width:28px;background:linear-gradient(135deg,var(--cyan),var(--mint));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.ti-t{font-size:14px;font-weight:500;color:var(--text-2);line-height:1.35;}
+.ti-tag{font-size:11px;color:var(--text-4);margin-top:2px;}
+
+.bp{background:var(--glass);border:1px solid var(--bdr);border-radius:var(--r-lg);padding:22px;}
+.bp h3{font:500 18px/1 'Playfair Display',serif;color:var(--text);margin-bottom:3px;}
+.bp-sub{font-size:12px;color:var(--text-4);margin-bottom:14px;}
+.bpi{display:flex;gap:11px;padding:10px 0;border-top:1px solid var(--bdr);text-decoration:none;color:inherit;transition:opacity 0.2s;}
+.bpi:hover{opacity:0.7;}
+.bpi-img{width:44px;height:44px;border-radius:10px;overflow:hidden;flex-shrink:0;}
+.bpi-img img{width:100%;height:100%;object-fit:cover;}
+.bpi h4{font-size:13px;font-weight:600;color:var(--text);margin-bottom:1px;}
+.bpi p{font-size:11px;color:var(--text-4);line-height:1.4;}
+
+footer{background:rgba(2,4,8,0.95);border-top:1px solid var(--bdr);padding:56px 28px 36px;margin-top:72px;}
+.ft-in{max-width:1300px;margin:0 auto;display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr;gap:44px;}
+.ft-brand{display:flex;align-items:center;gap:9px;margin-bottom:14px;}
+.ft-desc{font-size:13px;color:var(--text-4);line-height:1.65;max-width:340px;margin-bottom:16px;}
+.ft-pow{font-size:11px;color:var(--text-4);opacity:0.5;}
+.ft-pow a{color:var(--cyan);text-decoration:none;}
+footer h4{font:500 14px/1 'Playfair Display',serif;color:var(--text);margin-bottom:14px;}
+footer ul{list-style:none;display:flex;flex-direction:column;gap:8px;}
+footer ul a{color:var(--text-4);text-decoration:none;font-size:13px;transition:color 0.2s;}
+footer ul a:hover{color:var(--cyan);}
+.ft-bot{max-width:1300px;margin:40px auto 0;padding-top:20px;border-top:1px solid var(--bdr);display:flex;justify-content:space-between;font-size:11px;color:var(--text-4);opacity:0.4;}
+
+/* LOAD MORE */
+.load-more{text-align:center;padding:40px 0;}
+.load-btn{background:var(--glass-md);border:1px solid var(--bdr-md);color:var(--text-2);padding:14px 48px;border-radius:14px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;transition:all 0.3s;}
+.load-btn:hover{background:rgba(78,205,196,0.08);border-color:rgba(78,205,196,0.2);color:var(--cyan);transform:translateY(-2px);}
+
+/* RESPONSIVE */
+@media(max-width:1060px){.feat-row{grid-template-columns:1fr;}.main{grid-template-columns:1fr;}.ft-in{grid-template-columns:1fr 1fr;}}
+@media(max-width:700px){
+  nav{padding:0 16px;}.hero-img{height:360px;}.hero-content{padding:0 16px 32px;}
+  .nav-r{display:none;flex-direction:column;position:absolute;top:64px;left:0;right:0;background:rgba(7,13,24,0.95);backdrop-filter:blur(30px);padding:16px;border-bottom:1px solid var(--bdr);gap:4px;}
+  .nav-r.open{display:flex;}.nav-r a{padding:12px 16px;width:100%;border-radius:10px;}.nav-mob{display:flex;}
+  .ac{grid-template-columns:1fr;}.ac-img img{height:180px;}.weird-grid{grid-template-columns:1fr;}
+  .ft-in{grid-template-columns:1fr;gap:28px;}.ft-bot{flex-direction:column;gap:6px;text-align:center;}
+  .feat-row{gap:14px;padding:0 16px;}.sec{padding:0 16px;}.main{padding:0 16px 60px;}
+  .sec-head{flex-direction:column;gap:12px;align-items:flex-start;}.ifad{flex-direction:column;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<div class="space"><div class="space-photo"></div><div class="space-grade"></div></div>
+
+<div class="wrap">
+
+<nav>
+  <div class="nav-in">
+    <a href="/" class="brand"><div class="logo">N</div><div class="wordmark">New<span>phoria</span></div></a>
+    <ul class="nav-r">
+      <li><a href="/" class="on">Today</a></li>
+      <li><a href="/innovation">Innovation</a></li>
+      <li><a href="/science">Science</a></li>
+      <li><a href="/space">Space</a></li>
+      <li><a href="/community">Community</a></li>
+      <li><a href="/weird">The Weird</a></li>
+      <li><a href="#nl" class="nav-sub">Subscribe</a></li>
+      <li><a href="/plus" class="nav-plus">Newphoria+</a></li>
+    </ul>
+    <button class="nav-mob" aria-label="Menu" onclick="document.querySelector('.nav-r').classList.toggle('open')"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-img">
+    <div class="hero-overlay"></div>
+    <div class="hero-content"><div class="hero-inner">
+      <div class="hero-tag"><span class="dot"></span> Featured</div>
+      <h1>Fusion Reactor Sustains Plasma for 48 Minutes, Shattering Previous Record</h1>
+      <div class="hero-src"><strong>Nature</strong> · 2 hours ago · 6 min read</div>
+      <p class="hero-excerpt">South Korea's KSTAR reactor maintained a stable 100-million-degree plasma for 48 minutes, bringing commercially viable fusion energy closer than ever. Scientists say a grid-connected prototype could arrive by 2035.</p>
+      <a href="#" class="hero-link">Read Full Story <span>→</span></a>
+    </div></div>
+  </div>
+</section>
+
+<!-- FEATURED ROW -->
+<div class="feat-row">
+  <a href="#" class="feat">
+    <div class="feat-img"><img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=600&q=80" alt="" loading="lazy"><div class="feat-ov"></div><div class="feat-bloom">Bloom 5</div><div class="feat-src">NASA JPL</div></div>
+    <div class="feat-body"><div class="feat-cat c-violet">Space</div><h3 class="feat-t">Mars Sample Return Mission Confirms Ancient Microbial Biosignatures</h3><p class="feat-ex">Analysis of Perseverance's cached samples reveals organic molecules consistent with ancient microbial life in Jezero Crater sediments.</p><div class="feat-m">4 hours ago</div></div>
+  </a>
+  <a href="#" class="feat">
+    <div class="feat-img"><img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=600&q=80" alt="" loading="lazy"><div class="feat-ov"></div><div class="feat-bloom">Bloom 5</div><div class="feat-src">The Lancet</div></div>
+    <div class="feat-body"><div class="feat-cat c-rose">Health</div><h3 class="feat-t">Universal Cancer Vaccine Enters Phase III Trials After Extraordinary Early Results</h3><p class="feat-ex">mRNA-based vaccine trains the immune system to recognize and destroy 12 common cancer types. Phase II showed 78% tumor reduction.</p><div class="feat-m">5 hours ago</div></div>
+  </a>
+  <a href="#" class="feat">
+    <div class="feat-img"><img src="https://images.unsplash.com/photo-1473445730015-841f29a9490b?w=600&q=80" alt="" loading="lazy"><div class="feat-ov"></div><div class="feat-bloom">Bloom 4</div><div class="feat-src">Reuters</div></div>
+    <div class="feat-body"><div class="feat-cat c-mint">Environment</div><h3 class="feat-t">Amazon Rainforest Shows Net Growth for First Time in 20 Years</h3><p class="feat-ex">Satellite data confirms Brazil's deforestation reversal is producing measurable canopy recovery across the eastern Amazon basin.</p><div class="feat-m">3 hours ago</div></div>
+  </a>
+</div>
+
+<!-- SECTION HEADER -->
+<div class="sec"><div class="sec-head">
+  <h2 class="sec-t"><span class="dot"></span> Today</h2>
+  <div class="filters">
+    <button class="fil on" data-cat="all">All</button>
+    <button class="fil" data-cat="innovation">Innovation</button>
+    <button class="fil" data-cat="science">Science</button>
+    <button class="fil" data-cat="space">Space</button>
+    <button class="fil" data-cat="health">Health</button>
+    <button class="fil" data-cat="community">Community</button>
+    <button class="fil" data-cat="environment">Environment</button>
+  </div>
+</div></div>
+
+<!-- MAIN -->
+<div class="main">
+<div class="feed" id="feed">
+
+  <a href="#" class="ac"><div class="ac-img"><img src="https://images.unsplash.com/photo-1583212292454-1fe6229603b7?w=500&q=80" alt="" loading="lazy"><div class="ac-ov"></div><div class="ac-bloom b5">5</div><div class="ac-src">BBC</div></div><div class="ac-body"><div class="ac-cat c-mint">Environment</div><h3 class="ac-t">Great Barrier Reef Records Highest Coral Cover in 36 Years of Monitoring</h3><p class="ac-ex">Annual surveys show coral recovery exceeding expectations across two-thirds of the reef system.</p><div class="ac-m">2 hours ago</div></div></a>
+
+  <a href="#" class="ac"><div class="ac-img"><img src="https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=500&q=80" alt="" loading="lazy"><div class="ac-ov"></div><div class="ac-bloom b4">4</div><div class="ac-src">Bloomberg</div></div><div class="ac-body"><div class="ac-cat c-cyan">Innovation</div><h3 class="ac-t">First Solid-State Battery Factory Opens With 600-Mile Range and 10-Minute Charging</h3><p class="ac-ex">Mass production begins on batteries that could move electric vehicles from early-adopter niche to mainstream default.</p><div class="ac-m">4 hours ago</div></div></a>
+
+  <a href="#" class="ac"><div class="ac-img"><img src="https://images.unsplash.com/photo-1509773896068-7fd415d91e2e?w=500&q=80" alt="" loading="lazy"><div class="ac-ov"></div><div class="ac-bloom b5">5</div><div class="ac-src">NASA</div></div><div class="ac-body"><div class="ac-cat c-violet">Space</div><h3 class="ac-t">Voyager 1 Sends New Data From Interstellar Space, 15 Billion Miles From Home</h3><p class="ac-ex">The 47-year-old spacecraft continues transmitting from beyond our solar system, rewriting what we know about the heliosphere.</p><div class="ac-m">5 hours ago</div></div></a>
+
+  <!-- AD -->
+  <div class="ifad"><div class="ifad-lab">Promoted</div><div class="ifad-img"><img src="https://images.unsplash.com/photo-1545389336-cf090694435e?w=200&q=80" alt=""></div><div><h4>Headspace</h4><p>14-day free trial. Science-backed meditation for better sleep, focus, and clarity.</p><a href="#">Try Free →</a></div></div>
+
+  <a href="#" class="ac"><div class="ac-img"><img src="https://images.unsplash.com/photo-1576086213369-97a306d36557?w=500&q=80" alt="" loading="lazy"><div class="ac-ov"></div><div class="ac-bloom b4">4</div><div class="ac-src">The Lancet</div></div><div class="ac-body"><div class="ac-cat c-rose">Health</div><h3 class="ac-t">Gene Therapy Restores Hearing in 90% of Children in Landmark Clinical Trial</h3><p class="ac-ex">A single treatment restores auditory function in children born with genetic hearing loss, published in Nature Medicine.</p><div class="ac-m">6 hours ago</div></div></a>
+
+  <a href="#" class="ac"><div class="ac-img"><img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?w=500&q=80" alt="" loading="lazy"><div class="ac-ov"></div><div class="ac-bloom b5">5</div><div class="ac-src">AP News</div></div><div class="ac-body"><div class="ac-cat c-mint">Community</div><h3 class="ac-t">Detroit Transforms 200 Vacant Lots Into Urban Farms Feeding 2,000 Families</h3><p class="ac-ex">A grassroots initiative that started with three volunteers has grown into 40 urban farms across the city's east side.</p><div class="ac-m">5 hours ago</div></div></a>
+
+  <a href="#" class="ac"><div class="ac-img"><img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=500&q=80" alt="" loading="lazy"><div class="ac-ov"></div><div class="ac-bloom b4">4</div><div class="ac-src">The Guardian</div></div><div class="ac-body"><div class="ac-cat c-gold">Education</div><h3 class="ac-t">Finland Makes AI Literacy Mandatory Across All Schools</h3><p class="ac-ex">Every student will understand machine learning fundamentals by age 12 under the new national curriculum.</p><div class="ac-m">7 hours ago</div></div></a>
+
+  <div class="adsense"><span>Google AdSense</span></div>
+
+  <a href="#" class="ac"><div class="ac-img"><img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=500&q=80" alt="" loading="lazy"><div class="ac-ov"></div><div class="ac-bloom b5">5</div><div class="ac-src">Good News Network</div></div><div class="ac-body"><div class="ac-cat c-rose">Kindness</div><h3 class="ac-t">Retired Teacher's Free Weekend Math Program Helps 500 Students Pass State Exams</h3><p class="ac-ex">Maria Gonzalez's tutoring initiative has become a national model for community-led education programs.</p><div class="ac-m">8 hours ago</div></div></a>
+
+  <a href="#" class="ac"><div class="ac-img"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=500&q=80" alt="" loading="lazy"><div class="ac-ov"></div><div class="ac-bloom b4">4</div><div class="ac-src">Wired</div></div><div class="ac-body"><div class="ac-cat c-cyan">Innovation</div><h3 class="ac-t">New Quantum Chip Solves in 4 Minutes What Would Take Classical Computers 47 Years</h3><p class="ac-ex">Google's Willow processor demonstrates practical quantum advantage on real-world optimization problems for the first time.</p><div class="ac-m">9 hours ago</div></div></a>
+
+  <a href="#" class="ac"><div class="ac-img"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&q=80" alt="" loading="lazy"><div class="ac-ov"></div><div class="ac-bloom b5">5</div><div class="ac-src">Reuters</div></div><div class="ac-body"><div class="ac-cat c-mint">Community</div><h3 class="ac-t">Iceland Becomes First Country to Close Its Gender Pay Gap Entirely</h3><p class="ac-ex">After decades of incremental policy changes, independent auditors confirm Iceland has achieved statistical pay equity across all sectors.</p><div class="ac-m">10 hours ago</div></div></a>
+
+  <!-- AD 2 -->
+  <div class="ifad"><div class="ifad-lab">Promoted</div><div class="ifad-img"><img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=200&q=80" alt=""></div><div><h4>AG1 by Athletic Greens</h4><p>75 vitamins, minerals, and whole food ingredients. One daily habit that covers your nutritional bases.</p><a href="#">Learn More →</a></div></div>
+
+  <a href="#" class="ac"><div class="ac-img"><img src="https://images.unsplash.com/photo-1454789548928-9efd52dc4031?w=500&q=80" alt="" loading="lazy"><div class="ac-ov"></div><div class="ac-bloom b5">5</div><div class="ac-src">ESA</div></div><div class="ac-body"><div class="ac-cat c-violet">Space</div><h3 class="ac-t">Europa Clipper Detects Plumes of Water Vapor Erupting From Jupiter's Moon</h3><p class="ac-ex">Direct sampling of the plumes reveals complex organic chemistry and salts consistent with a subsurface ocean in contact with a rocky core.</p><div class="ac-m">11 hours ago</div></div></a>
+
+  <a href="#" class="ac"><div class="ac-img"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=500&q=80" alt="" loading="lazy"><div class="ac-ov"></div><div class="ac-bloom b4">4</div><div class="ac-src">MIT Tech Review</div></div><div class="ac-body"><div class="ac-cat c-cyan">Innovation</div><h3 class="ac-t">Desalination Breakthrough Cuts Energy Cost by 90%, Using Sunlight Alone</h3><p class="ac-ex">MIT engineers develop a passive solar desalination system that produces drinking water at a fraction of current costs, no electricity required.</p><div class="ac-m">12 hours ago</div></div></a>
+
+  <a href="#" class="ac"><div class="ac-img"><img src="https://images.unsplash.com/photo-1504439468489-c8920d796a29?w=500&q=80" alt="" loading="lazy"><div class="ac-ov"></div><div class="ac-bloom b4">4</div><div class="ac-src">STAT News</div></div><div class="ac-body"><div class="ac-cat c-rose">Health</div><h3 class="ac-t">Alzheimer's Blood Test Achieves 95% Accuracy, Eliminating Need for Spinal Taps</h3><p class="ac-ex">A simple blood draw can now detect Alzheimer's disease up to 15 years before symptoms appear, enabling early intervention.</p><div class="ac-m">13 hours ago</div></div></a>
+
+  <a href="#" class="ac"><div class="ac-img"><img src="https://images.unsplash.com/photo-1473445730015-841f29a9490b?w=500&q=80" alt="" loading="lazy"><div class="ac-ov"></div><div class="ac-bloom b5">5</div><div class="ac-src">BBC</div></div><div class="ac-body"><div class="ac-cat c-mint">Environment</div><h3 class="ac-t">Atlantic Whale Population Rebounds to Pre-Whaling Numbers for First Time</h3><p class="ac-ex">Humpback whale populations in the North Atlantic have recovered to an estimated 93,000, matching 18th-century baselines.</p><div class="ac-m">14 hours ago</div></div></a>
+
+  <a href="#" class="ac"><div class="ac-img"><img src="https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=500&q=80" alt="" loading="lazy"><div class="ac-ov"></div><div class="ac-bloom b4">4</div><div class="ac-src">Nature</div></div><div class="ac-body"><div class="ac-cat c-violet">Science</div><h3 class="ac-t">Scientists Successfully Reverse Aging in Human Cells for the First Time</h3><p class="ac-ex">A combination of Yamanaka factors applied in controlled pulses resets cellular age markers by an average of 25 years in lab conditions.</p><div class="ac-m">15 hours ago</div></div></a>
+
+  <div class="adsense"><span>Google AdSense</span></div>
+
+  <a href="#" class="ac"><div class="ac-img"><img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=500&q=80" alt="" loading="lazy"><div class="ac-ov"></div><div class="ac-bloom b4">4</div><div class="ac-src">Ars Technica</div></div><div class="ac-body"><div class="ac-cat c-cyan">Innovation</div><h3 class="ac-t">Room-Temperature Superconductor Independently Verified by Three Labs</h3><p class="ac-ex">After years of controversy, the modified lead apatite compound has been replicated under controlled conditions at MIT, Max Planck, and KAIST.</p><div class="ac-m">16 hours ago</div></div></a>
+
+  <a href="#" class="ac"><div class="ac-img"><img src="https://images.unsplash.com/photo-1569163139599-0f4517e36f51?w=500&q=80" alt="" loading="lazy"><div class="ac-ov"></div><div class="ac-bloom b5">5</div><div class="ac-src">AP News</div></div><div class="ac-body"><div class="ac-cat c-mint">Community</div><h3 class="ac-t">Largest Ever Housing-First Program Reduces Homelessness by 60% in Houston</h3><p class="ac-ex">Houston's data-driven approach to homelessness has housed 28,000 people since 2012, becoming the national benchmark.</p><div class="ac-m">17 hours ago</div></div></a>
+
+  <a href="#" class="ac"><div class="ac-img"><img src="https://images.unsplash.com/photo-1614732414444-096e5f1122d5?w=500&q=80" alt="" loading="lazy"><div class="ac-ov"></div><div class="ac-bloom b5">5</div><div class="ac-src">Space.com</div></div><div class="ac-body"><div class="ac-cat c-violet">Space</div><h3 class="ac-t">SpaceX Starship Successfully Lands on the Moon in Uncrewed Test Mission</h3><p class="ac-ex">The Artemis cargo variant touched down near the lunar south pole, delivering 100 tonnes of supplies ahead of crewed missions in 2027.</p><div class="ac-m">18 hours ago</div></div></a>
+
+  <!-- ═══════════════════════════════ -->
+  <!-- WONDERFULLY WEIRD              -->
+  <!-- ═══════════════════════════════ -->
+  <div class="weird" id="weird">
+    <div class="weird-head"><h2 class="weird-t">The Wonderfully Weird</h2></div>
+    <p class="weird-sub">The parts of this planet — and beyond — that don't quite make sense</p>
+
+    <div class="weird-grid">
+
+      <a href="#" class="wc"><div class="wc-img"><img src="https://images.unsplash.com/photo-1534294668821-28a3054f4256?w=400&q=80" alt="" loading="lazy"><div class="wc-ov"></div></div><div class="wc-body"><h4 class="wc-t">Pentagon's UAP Task Force Releases 12 New Videos of Objects Defying Known Physics</h4><p class="wc-d">The All-domain Anomaly Resolution Office confirms the objects exhibit acceleration patterns that exceed current aerospace capabilities by orders of magnitude.</p><div class="wc-tag">UAP · Aerospace</div></div></a>
+
+      <a href="#" class="wc"><div class="wc-img"><img src="https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?w=400&q=80" alt="" loading="lazy"><div class="wc-ov"></div></div><div class="wc-body"><h4 class="wc-t">Earth Hums a Constant Note That Nobody Can Hear</h4><p class="wc-d">The planet vibrates at 10.68 millihertz, caused by ocean waves hitting the seafloor. We live on an instrument that never stops playing.</p><div class="wc-tag">Geophysics</div></div></a>
+
+      <a href="#" class="wc"><div class="wc-img"><img src="https://images.unsplash.com/photo-1545671913-b89d727d50a0?w=400&q=80" alt="" loading="lazy"><div class="wc-ov"></div></div><div class="wc-body"><h4 class="wc-t">Octopuses Deliberately Throw Things at Each Other When They're Annoyed</h4><p class="wc-d">Marine biologists captured footage of directed silt-hurling. Published in PLOS ONE, the behavior appears intentional and targeted.</p><div class="wc-tag">Marine Biology</div></div></a>
+
+      <a href="#" class="wc"><div class="wc-img"><img src="https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?w=400&q=80" alt="" loading="lazy"><div class="wc-ov"></div></div><div class="wc-body"><h4 class="wc-t">Fast Radio Burst From Deep Space Repeats in a Perfect 16-Day Pattern</h4><p class="wc-d">FRB 180916 sends millisecond bursts of energy from 500 million light-years away on an exact schedule. No natural explanation has held up.</p><div class="wc-tag">Astrophysics</div></div></a>
+
+      <a href="#" class="wc"><div class="wc-img"><img src="https://images.unsplash.com/photo-1552728089-57bdde30beb3?w=400&q=80" alt="" loading="lazy"><div class="wc-ov"></div></div><div class="wc-body"><h4 class="wc-t">Australian Cockatoos Teaching Each Other to Open Bins — With Regional Techniques</h4><p class="wc-d">Sulphur-crested cockatoos pass the skill through social learning. Different suburbs have developed distinct opening methods.</p><div class="wc-tag">Animal Intelligence</div></div></a>
+
+      <a href="#" class="wc"><div class="wc-img"><img src="https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=400&q=80" alt="" loading="lazy"><div class="wc-ov"></div></div><div class="wc-body"><h4 class="wc-t">The Wow! Signal: 47 Years Later, Astronomers Narrow the Source to a Single Star</h4><p class="wc-d">New analysis of the famous 1977 signal points to 2MASS 19281982-0521002, a sun-like star 1,800 light-years away in Sagittarius.</p><div class="wc-tag">SETI · Radio Astronomy</div></div></a>
+
+      <a href="#" class="wc"><div class="wc-img"><img src="https://images.unsplash.com/photo-1507400492013-162706c8c05e?w=400&q=80" alt="" loading="lazy"><div class="wc-ov"></div></div><div class="wc-body"><h4 class="wc-t">Lake Baikal's Mysterious Ice Circles Visible From Space Still Have No Definitive Explanation</h4><p class="wc-d">Massive rotating circles of thin ice appear annually on the world's deepest lake. Warm water upwelling is suspected but doesn't fully account for the geometry.</p><div class="wc-tag">Limnology</div></div></a>
+
+      <a href="#" class="wc"><div class="wc-img"><img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&q=80" alt="" loading="lazy"><div class="wc-ov"></div></div><div class="wc-body"><h4 class="wc-t">Japan Builds World's Largest Pizza Vending Machine With 47 AI-Controlled Varieties</h4><p class="wc-d">A custom AI oven in Hiroshima serves 14-inch pies in under 3 minutes, including a squid ink special. Daily queues exceed 200 people.</p><div class="wc-tag">Food Technology</div></div></a>
+
+      <a href="#" class="wc"><div class="wc-img"><img src="https://images.unsplash.com/photo-1462332420958-a05d1e002413?w=400&q=80" alt="" loading="lazy"><div class="wc-ov"></div></div><div class="wc-body"><h4 class="wc-t">Physicists Confirm Particles Can Exist in Two Places Simultaneously at Macro Scale</h4><p class="wc-d">A 2-milligram sapphire crystal was placed in quantum superposition, existing in two locations 0.1mm apart. Visible to the human eye.</p><div class="wc-tag">Quantum Physics</div></div></a>
+
+      <a href="#" class="wc"><div class="wc-img"><img src="https://images.unsplash.com/photo-1504700610630-ac6edd918cc0?w=400&q=80" alt="" loading="lazy"><div class="wc-ov"></div></div><div class="wc-body"><h4 class="wc-t">Navy Pilots Report Formation of Luminous Spheres Pacing Aircraft Over the Pacific</h4><p class="wc-d">Multiple sensor systems recorded objects maintaining exact formation with carrier aircraft for 11 minutes before accelerating beyond tracking range.</p><div class="wc-tag">UAP · Military</div></div></a>
+
+      <a href="#" class="wc"><div class="wc-img"><img src="https://images.unsplash.com/photo-1485550409059-9afb054cada4?w=400&q=80" alt="" loading="lazy"><div class="wc-ov"></div></div><div class="wc-body"><h4 class="wc-t">Trees in Forests Communicate Through Underground Fungal Networks</h4><p class="wc-d">The "Wood Wide Web" allows trees to share nutrients with sick neighbors and warn each other about insect attacks through mycorrhizal connections.</p><div class="wc-tag">Mycology</div></div></a>
+
+      <a href="#" class="wc"><div class="wc-img"><img src="https://images.unsplash.com/photo-1464802686167-b939a6910659?w=400&q=80" alt="" loading="lazy"><div class="wc-ov"></div></div><div class="wc-body"><h4 class="wc-t">Interstellar Object 'Oumuamua Still Defies Every Natural Explanation Proposed</h4><p class="wc-d">Six years of analysis haven't produced a consensus. Its acceleration, shape, and silence remain unlike any comet, asteroid, or known phenomenon.</p><div class="wc-tag">Astrophysics · SETI</div></div></a>
+
+    </div>
+
+    <div class="load-more"><button class="load-btn" onclick="this.textContent='Loading more...';setTimeout(()=>this.textContent='Load More Stories',1500)">Load More Weird</button></div>
+  </div>
+
+</div>
+
+<!-- SIDEBAR -->
+<aside class="side">
+  <div class="sad"><div class="sad-lab">Promoted</div><div class="sad-in"><div class="sad-img"><img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&q=80" alt="" loading="lazy"></div><div class="sad-t">AG1 Daily Greens</div><div class="sad-d">75 vitamins, minerals, and whole food ingredients. One scoop, every morning.</div><a href="#" class="sad-cta" rel="sponsored">Learn More →</a></div></div>
+
+  <div class="prem" id="prem"><div class="prem-badge">Newphoria+</div><h4>Go Deeper</h4><p>Remove ads. Personalize your feed. Get the full experience.</p><ul class="prem-list"><li>Ad-free reading</li><li>Personalized topic feeds</li><li>Daily audio briefing</li><li>Extended Wonderfully Weird</li><li>Bloom History — track what inspires you</li><li>Custom topic alerts</li><li>Early access to stories</li></ul><a href="/plus" class="prem-btn">Start 7-Day Free Trial</a><p class="prem-price">$5.99/month after trial · Cancel anytime</p></div>
+
+  <div class="nl" id="nl"><h3>The Morning Brief</h3><p>The day's most important constructive stories. Delivered before your first coffee.</p><form class="nl-f" onsubmit="event.preventDefault();this.querySelector('button').textContent='You\'re in.';this.querySelector('button').style.background='var(--mint)';"><input type="email" class="nl-i" placeholder="your@email.com" required><button type="submit" class="nl-b">Subscribe Free</button></form></div>
+
+  <div class="trend"><h3>Trending</h3>
+    <div class="ti"><span class="ti-n">1</span><div><div class="ti-t">Fusion reactor sustains plasma for 48 minutes</div><div class="ti-tag">Innovation · 24K reads</div></div></div>
+    <div class="ti"><span class="ti-n">2</span><div><div class="ti-t">Mars samples confirm ancient biosignatures</div><div class="ti-tag">Space · 19K reads</div></div></div>
+    <div class="ti"><span class="ti-n">3</span><div><div class="ti-t">Pentagon releases 12 new UAP videos</div><div class="ti-tag">The Weird · 17K reads</div></div></div>
+    <div class="ti"><span class="ti-n">4</span><div><div class="ti-t">Universal cancer vaccine enters Phase III</div><div class="ti-tag">Health · 15K reads</div></div></div>
+    <div class="ti"><span class="ti-n">5</span><div><div class="ti-t">Amazon shows net growth for first time in 20 years</div><div class="ti-tag">Environment · 13K reads</div></div></div>
+    <div class="ti"><span class="ti-n">6</span><div><div class="ti-t">'Oumuamua still defies every explanation</div><div class="ti-tag">The Weird · 12K reads</div></div></div>
+    <div class="ti"><span class="ti-n">7</span><div><div class="ti-t">Room-temperature superconductor verified</div><div class="ti-tag">Innovation · 11K reads</div></div></div>
+  </div>
+
+  <div class="adsense" style="min-height:250px;"><span>Ad Space</span></div>
+
+  <div class="bp"><h3>Bloom Picks</h3><p class="bp-sub">Curated wellness</p>
+    <a href="#" class="bpi"><div class="bpi-img"><img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=100&q=80" alt=""></div><div><h4>Vitamin D3+K2</h4><p>Mood and immunity support</p></div></a>
+    <a href="#" class="bpi"><div class="bpi-img"><img src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=100&q=80" alt=""></div><div><h4>Calm Magnesium</h4><p>Better sleep, less stress</p></div></a>
+    <a href="#" class="bpi"><div class="bpi-img"><img src="https://images.unsplash.com/photo-1563822249366-3efb23b8e0c9?w=100&q=80" alt=""></div><div><h4>Ceremonial Matcha</h4><p>Clean energy, no crash</p></div></a>
+    <a href="#" class="bpi"><div class="bpi-img"><img src="https://images.unsplash.com/photo-1546868871-af0de0ae72be?w=100&q=80" alt=""></div><div><h4>Lions Mane Extract</h4><p>Focus and neurogenesis</p></div></a>
+  </div>
+
+  <div class="sad"><div class="sad-lab">Promoted</div><div class="sad-in"><div class="sad-img"><img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&q=80" alt="" loading="lazy"></div><div class="sad-t">Calm — 40% Off</div><div class="sad-d">Sleep stories, guided meditation, and breathing exercises for 100M+ users worldwide.</div><a href="#" class="sad-cta" rel="sponsored">Start Free Trial →</a></div></div>
+</aside>
+</div>
+
+<footer>
+  <div class="ft-in">
+    <div><div class="ft-brand"><div class="logo" style="width:30px;height:30px;font-size:15px;">N</div><span class="wordmark" style="font-size:18px;">New<span>phoria</span></span></div><p class="ft-desc">Constructive journalism, curated by AI. The stories that move the world forward.</p><div class="ft-pow">Powered by <a href="https://coapto.ai">Coaptō</a> intelligence</div></div>
+    <div><h4>Sections</h4><ul><li><a href="/">Today</a></li><li><a href="/innovation">Innovation</a></li><li><a href="/science">Science</a></li><li><a href="/space">Space</a></li><li><a href="/community">Community</a></li><li><a href="/weird">The Wonderfully Weird</a></li></ul></div>
+    <div><h4>Company</h4><ul><li><a href="/about">About</a></li><li><a href="/how-it-works">How It Works</a></li><li><a href="/advertise">Advertise</a></li><li><a href="/plus">Newphoria+</a></li><li><a href="/contact">Contact</a></li></ul></div>
+    <div><h4>Legal</h4><ul><li><a href="/privacy">Privacy Policy</a></li><li><a href="/terms">Terms of Use</a></li><li><a href="/cookies">Cookie Policy</a></li></ul></div>
+  </div>
+  <div class="ft-bot"><span>© 2026 Newphoria News · Agapē LAC Inc.</span><span>Calgary, AB, Canada</span></div>
+</footer>
+
+</div>
+
+<script>
+// Filter handling
+document.querySelectorAll('.fil').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.fil').forEach(f=>f.classList.remove('on'));
+    btn.classList.add('on');
+    const cat=btn.dataset.cat;
+    document.querySelectorAll('.ac').forEach(a=>{
+      if(cat==='all'){a.style.display='';}
+      else{const c=a.querySelector('.ac-cat')?.textContent.toLowerCase().trim();a.style.display=c===cat?'':'none';}
+    });
+  });
+});
+// Newsletter
+document.querySelector('.nl-f')?.addEventListener('submit',e=>{
+  e.preventDefault();const b=e.target.querySelector('button');b.textContent="You're in.";b.style.background='var(--mint)';e.target.querySelector('input').value='';
+});
+// Mobile nav
+document.querySelector('.nav-mob')?.addEventListener('click',()=>document.querySelector('.nav-r').classList.toggle('open'));
+</script>
+<!-- Dynamic data layer — loads live articles from Supabase when available -->
+<!-- Uncomment after Supabase is configured: -->
+<!-- <script src="/js/data.js"></script> -->
+
+</body>
+</html>
